@@ -1,6 +1,6 @@
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_PROD_COUNT = "Cant.";
+const ORDER_BY_COST = "Cant.";
 var currentCategoriesArray = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
@@ -21,7 +21,7 @@ function sortCategories(criteria, array){
             if ( a.name < b.name ){ return 1; }
             return 0;
         });
-    }else if (criteria === ORDER_BY_PROD_COUNT){
+    }else if (criteria === ORDER_BY_COST){
         result = array.sort(function(a, b) {
             let aCount = parseInt(a.cost);
             let bCount = parseInt(b.cost);
@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     });
 
     document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_BY_PROD_COUNT);
+        sortAndShowCategories(ORDER_BY_COST);
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){

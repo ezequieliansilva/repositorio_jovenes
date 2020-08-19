@@ -1,6 +1,9 @@
 const ORDER_ASC_BY_NAME = "AZ";
 const ORDER_DESC_BY_NAME = "ZA";
-const ORDER_BY_COST = "Cant.";
+const ORDER_BY_COST = "Cost up";
+const ORDER_ASC_BY_COST = "Cost down";
+const ORDER_ASC_BY_SOLDOUT = "Sold up";
+const ORDER_DESC_BY_SOLDOUT = "Sold down";
 var currentProducsArray = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
@@ -30,6 +33,33 @@ function sortProducts(criteria, array){
             if ( aCount < bCount ){ return 1; }
             return 0;
         });
+    }else if (criteria === ORDER_ASC_BY_COST){
+        result = array.sort(function(a, b) {
+            let aCount = parseInt(a.cost);
+            let bCount = parseInt(b.cost);
+
+            if ( aCount < bCount ){ return -1; }
+            if ( aCount > bCount ){ return 1; }
+            return 0;
+        });
+    }else if (criteria ===  ORDER_ASC_BY_SOLDOUT){
+        result = array.sort(function(a, b) {
+            let aCount = parseInt(a.soldCount);
+            let bCount = parseInt(b.soldCount);
+
+            if ( aCount > bCount ){ return -1; }
+            if ( aCount < bCount ){ return 1; }
+            return 0;
+        });
+    }else if (criteria ===  ORDER_DESC_BY_SOLDOUT){
+        result = array.sort(function(a, b) {
+            let aCount = parseInt(a.soldCount);
+            let bCount = parseInt(b.soldCount);
+
+            if ( aCount < bCount ){ return -1; }
+            if ( aCount > bCount ){ return 1; }
+            return 0;
+        });
     }
 
     return result;
@@ -53,10 +83,11 @@ function showProductsList(){
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
                             <h4 class="mb-1">`+ product.name +`</h4>
-                            <small class="text-muted">`+ product.currency+` ` + product.cost + `</small>
+                            <small class="text-muted"> Vendidos ` +product.soldCount+ `</small>
                         </div>
                         <p class="mb-1">`+ product.description + `</p>
-                    </div>
+                        <p class="mb-1">`+  product.currency+` ` + product.cost + `</p>
+                     </div>
                 </div>
             </a>
             `
@@ -98,6 +129,18 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
     document.getElementById("sortByCount").addEventListener("click", function(){
         sortAndShowProducts(ORDER_BY_COST);
+    });
+
+    document.getElementById("sortByCountDesc").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_ASC_BY_COST);
+    });
+
+    document.getElementById("sortBySoldAsc").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_ASC_BY_SOLDOUT);
+    });
+
+    document.getElementById("sortBySoldDesc").addEventListener("click", function(){
+        sortAndShowProducts(ORDER_DESC_BY_SOLDOUT);
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){

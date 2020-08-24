@@ -61,11 +61,11 @@ function leer(){
 
 
 document.addEventListener("DOMContentLoaded", function(e){
-    if(localStorage.getItem("usuario").length > 0){
+    if(localStorage.getItem("usuario") != null){
         leer();
     }
-    else {
-        document.getElementById('user').innerHTML="Sin iniciar sesion";
+    else { 
+        document.getElementById('user').innerHTML=" sin iniciar sesion";
         
         abrir();
     }

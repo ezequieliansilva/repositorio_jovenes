@@ -58,10 +58,10 @@ function leer(){
 }
 
 document.addEventListener("DOMContentLoaded", function(e){
-    if(localStorage.getItem("usuario").length > 0){
+    if(localStorage.getItem("usuario").value !== null){
         leer();
     }
-    else {
-        document.getElementById('user').innerHTML="Sin iniciar sesion";
+    if(localStorage.getItem("usuario").value === null) {
+        document.getElementById('user').innerHTML=" sin iniciar sesion";
     }
 });

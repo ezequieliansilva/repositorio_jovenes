@@ -8,6 +8,7 @@ var currentProducsArray = [];
 var currentSortCriteria = undefined;
 var minCount = undefined;
 var maxCount = undefined;
+var buscador = undefined;
 
 function sortProducts(criteria, array){
     let result = [];
@@ -72,7 +73,9 @@ function showProductsList(){
         let product = currentProductsArray[i];
 
         if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount)) &&
+            ((buscador == undefined) || (buscador != undefined && (product.name.toLowerCase().includes(buscador.toLowerCase()) ||
+            (product.description.toLowerCase().includes(buscador.toLowerCase())))))){
 
             htmlContentToAppend += `
             <a href="product-info.html" class="list-group-item list-group-item-action">
@@ -149,6 +152,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         minCount = undefined;
         maxCount = undefined;
+        buscador = undefined;
 
         showProductsList();
     });
@@ -178,3 +182,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 
 });
+
+document.getElementById("detective").addEventListener("keyup", function(){
+    buscar();
+});
+
+function buscar()
+{
+    buscador = document.getElementById("detective").value;
+    showProductsList();
+}

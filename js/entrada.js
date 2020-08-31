@@ -28,7 +28,7 @@ function guardar(dato, pass){
     localStorage.setItem("usuario", dato.trim()); //setItem almacena el dato en la posición "usuario"
     localStorage.setItem("password", pass.trim()); // Almaceno la contraseña
     sessionStorage.setItem("usuario", dato.trim());
-    alert (" Usuario : " + dato + " Password : " + pass ); 
+    alert (" Usuario : " + dato ); 
     leer();
     //getItem obtiene el dato almacenado en la posición "usuario"
     }

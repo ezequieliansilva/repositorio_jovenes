@@ -74,11 +74,17 @@
   </main>
 
   <div class ="list-group" id = "comentariosListados"></div>
-  <form>
+  <form >
     <h3>Comentar</h3>
-    <p class="lead" > Puntaje de 1 a 5 <input type ="number" id = "puntaje"> </p>
-    <p class="lead" > Comentario <input type ="textarea" id = "comentario"> </p>
-    <input type = "button" value = "Publicar" onclick="comentar()">
+    <p class="lead" > Cantidad de estrellas (1 a 5) <select  id = "puntaje">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select> </p>
+    <p class="lead" > Comentario <br><textarea id = "comentario"></textarea> </p>
+    <input type = "button" value = "Publicar" onclick="verificarComentario()">
   </form>
   <footer class="text-muted">
     <div class="container">

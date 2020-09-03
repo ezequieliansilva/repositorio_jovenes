@@ -36,22 +36,21 @@ function showComentaries(){
             }
         }
         htmlContentToAppend += `
-        <div class="row">
-                    <div class="col-3">
-                        <span class="`+estrella[0]+`"></span>
-                        <span class="`+estrella[1]+`"></span>
-                        <span class="`+estrella[2]+`"></span>
-                        <span class="`+estrella[3]+`"></span>
-                        <span class="`+estrella[4]+`"></span>
-                    </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ comentary.user +`</h4>
-                            <small class="text-muted"> realizado ` +comentary.dateTime+  `</small>
-                        </div>
+        <div >
+                <div class="col">
+                    <h4 class="mb-1">`+ comentary.user +`</h4>
+                    <span class="`+estrella[0]+`"></span>
+                    <span class="`+estrella[1]+`"></span>
+                    <span class="`+estrella[2]+`"></span>
+                    <span class="`+estrella[3]+`"></span>
+                    <span class="`+estrella[4]+`"></span>
+                    <div class="d-flex w-100 justify-content-between">
                         <p class="mb-1">`+ comentary.description + `</p>
-                     </div>
-                </div>
+                        <small class="text-muted"> realizado ` +comentary.dateTime+  `</small>
+                    </div>    
+             </div>
+             <br>
+        </div>
         `
 
         document.getElementById("comentariosListados").innerHTML = htmlContentToAppend;
@@ -90,15 +89,26 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (resultObj.status === "ok")
         {
             comentaries = resultObj.data;
-
-
-            //Muestro las imagenes en forma de galería
             showComentaries();
         }
     });
 });
 
 //-------------------------------------------------
+ verificarComentario = function(){
+    
+    if(document.getElementById("comentario").value.length > 3)
+    {
+        
+        comentar();
+    }
+    else {
+        
+        alert ("Comentario inexistente o muy corto");
+    }
+          
+}
+
 
 function comentar()
 {
@@ -114,6 +124,9 @@ function comentar()
     comentario.dateTime = fechaActual();
     comentaries.push(comentario);
     showComentaries()
+    document.getElementById("comentario").value = undefined;
+    comentario.score = document.getElementById("puntaje").value = "1";
+
 }
 
 function fechaActual()

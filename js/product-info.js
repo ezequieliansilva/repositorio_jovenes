@@ -124,7 +124,7 @@ function comentar()
     comentario.dateTime = fechaActual();
     comentaries.push(comentario);
     showComentaries()
-    document.getElementById("comentario").value = undefined;
+    document.getElementById("comentario").value = "";
     comentario.score = document.getElementById("puntaje").value = "1";
 
 }

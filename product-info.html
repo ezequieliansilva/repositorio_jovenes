@@ -24,8 +24,19 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
-      <button  id="btnModal" onclick= abrir()>Usuario <span id="user"></span></button>
+      <div class="dropdown">
+        <button class="btn btn-secondary type="button" id="btnModal" onclick= abrir()>
+          Usuario <span id="user"></span>
+        </button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="cart.html"> Mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <button class="dropdown-item" id = "btnCerrar" onclick="localStorage.clear(); alert('Usuario desconectado'); location.href='index.html';" >Cerrar sesion</button>
+        </div>
+      </div>
     </div>
   </nav>
   <div id="tvesModal" class="modalContainer">
@@ -69,6 +80,10 @@
           </div>
         </dd>
       </dl>
+      <dt>Productos Relacionados</dt>
+      <dd>
+        <div class="row text-center text-lg-left pt-2" id = "relacionados"></div>
+      </dd>
       <a type="button" class="btn btn-light btn-lg btn-block" href="categories.html">Ver categorias</a>
     </div>
   </main>

@@ -1,5 +1,6 @@
 var product = {};
 var comentaries = [];
+var productos = [];
 
 function showImagesGallery(array){
 
@@ -58,6 +59,26 @@ function showComentaries(){
     }
 }
 
+function showRelacionados(){
+
+    let htmlContentToAppend = "";
+    for(let i = 0; i < product.relatedProducts.length; i++){
+        let relatedProduct = product.relatedProducts[i];
+        let producto = productos[relatedProduct];
+        htmlContentToAppend += `
+        <div class="col-lg-3 col-md-4 col-6">
+            <div class="d-block mb-4 h-100">
+                <img class="img-fluid img-thumbnail" src="` + producto.imgSrc + `" >
+                <p>`+ producto.name +`</p>
+            </div>
+        </div>
+        `
+
+        document.getElementById("relacionados").innerHTML = htmlContentToAppend;
+        
+    }
+}
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -92,7 +113,18 @@ document.addEventListener("DOMContentLoaded", function(e){
             showComentaries();
         }
     });
+    getJSONData(PRODUCTS_URL).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            productos = resultObj.data;
+            showRelacionados()
+        }
+    });
+    
+    
 });
+
+
 
 //-------------------------------------------------
  verificarComentario = function(){

@@ -39,7 +39,7 @@ function printcarritou () {
       }
         htmlContentToAppend +=`
         <tr>
-          <td class="tg-0lax" colspan="5"><p> Total a pagar USD `+ total +`</p></td>
+          <td class="tg-0lax" colspan="5" ><h4  align = "center" > Total a pagar USD `+ total +`</h4></td>
         </tr>
         </tbody>
     </table>`;

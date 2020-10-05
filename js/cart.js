@@ -12,6 +12,7 @@ function convertir(precio , moneda ) {
 };
 function printcarritou () {
     let htmlContentToAppend = "";
+    let total = 0;
     htmlContentToAppend += `<table class="tg">
     <thead>
       <tr>
@@ -23,10 +24,10 @@ function printcarritou () {
       </tr>
     </thead>
     <tbody>`;
-    let a
       for(let i = 0; i < articulos.length; i++){ 
         let unArticulo = articulos[i];
         let convertido = convertir(unArticulo.unitCost , unArticulo.currency);
+        total += convertido* parseInt(unArticulo.count);
         htmlContentToAppend += `
       <tr>
         <td class="tg-0lax"><img class="img-fluid img-thumbnail" src="`+ unArticulo.src + `" alt=""></td>
@@ -36,7 +37,11 @@ function printcarritou () {
         <td class="tg-0lax"><p class="mb-1"> USD `+ convertido * parseInt(unArticulo.count) + `</p></td>
         </tr>`;
       }
-        htmlContentToAppend +=`</tbody>
+        htmlContentToAppend +=`
+        <tr>
+          <td class="tg-0lax" colspan="5"><p> Total a pagar USD `+ total +`</p></td>
+        </tr>
+        </tbody>
     </table>`;
     document.getElementById("carrito").innerHTML = htmlContentToAppend;
 };

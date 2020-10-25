@@ -1,6 +1,100 @@
 var prodCarrito = [];
 var articulos = [];
 var porEnvio = 5;
+var envioValido = false;
+
+function cambioBan()
+{
+  document.getElementById("datosBancoDiv").style.display = "block";
+  for (let i = 0; i < 3 ; i++)
+  {
+    document.getElementById("datosCredito").style.display = "none";
+  }
+}
+
+function cambioTar()
+{
+  document.getElementById("datosBancoDiv").style.display = "none";
+  for (let i = 0; i < 3 ; i++)
+  {
+    document.getElementById("datosCredito").style.display = "block";
+  }
+}
+
+function guardarDatos()
+{
+
+  let conteo = 0;
+  document.getElementById("datosBanco").style.backgroundColor = "white";
+  for(let i = 0;i<3;i++)
+  {
+    document.getElementsByClassName("datosCredito")[i].style.backgroundColor = "white";
+    document.getElementsByClassName("datosDireccion")[i].style.backgroundColor = "white";
+  }
+  if ( document.getElementById("transBanRadio").checked)
+  {
+    if(document.getElementById("datosBanco").value.length > 3)
+    {
+        conteo++;
+    }
+    else {
+      document.getElementById("datosBanco").style.backgroundColor = "pink";
+    }
+    for(let i = 0;i<3;i++)
+    {
+      if(document.getElementsByClassName("datosDireccion")[i].value.length > 3)
+      {
+        conteo++;
+      }
+      else {
+        document.getElementsByClassName("datosDireccion")[i].style.backgroundColor = "pink";
+      }
+
+    }
+    if(conteo == 4)
+    {
+      alert ("Sus datos se guararon exitosamente");
+      envioValido = true;
+    }
+    else {
+      alert ("Ingrese los campos faltantes");
+      envioValido = false;
+    }
+  }
+  if ( document.getElementById("tarCreRadio").checked)
+  {
+    for(let i = 0;i<3;i++)
+    {
+      if(document.getElementsByClassName("datosCredito")[i].value.length > 3)
+      {
+        conteo++;
+      }
+      else {
+        document.getElementsByClassName("datosCredito")[i].style.backgroundColor = "pink";
+      }
+    }
+    for(let i = 0;i<3;i++)
+    {
+      if(document.getElementsByClassName("datosDireccion")[i].value.length > 3)
+      {
+        conteo++;
+      }
+      else {
+        document.getElementsByClassName("datosDireccion")[i].style.backgroundColor = "pink";
+      }
+    }
+    if(conteo == 6)
+    {
+      alert ("Sus datos se guararon exitosamente");
+      envioValido = true;
+    }
+    else {
+      alert ("Ingrese los campos faltantes");
+      envioValido = false;
+    }
+  }
+}
+
 
 function convertir(precio , moneda ) {
     if ( moneda != "USD"){
@@ -16,7 +110,7 @@ function porcentaje(total)
 {
   let totalConPorcentaje = 0;
   totalConPorcentaje = total/100*porEnvio;
-  return total + totalConPorcentaje;
+  return totalConPorcentaje;
 }
 
 function recalcular(i , n)
@@ -34,6 +128,17 @@ function recalcular(i , n)
   });
   getElementById("total").innerHTML = total;*/
 
+}
+
+function envio(){
+  if(envioValido)
+  {
+    alert("Su pedido será enviado");
+  }
+  else
+  {
+    alert("No hay datos suficientes para cobrarle o enviarle su pedido");
+  }
 }
 
 function borrar(i)
@@ -80,12 +185,21 @@ function printcarritou () {
         </tr>`;*/
       }
         htmlContentToAppend +=`
-        <tr>
-          <td class="tg-0lax" colspan="5" ><h4  align = "center" id = "total" > Total a pagar USD `+ porcentaje(total) +`
-          
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        <tr >
+          <td class="tg-0lax" colspan="5" ><h4  align = "center">Subtotal USD `+ total +`</h4></td>
+        </tr>
+        <tr >
+          <td class="tg-0lax" colspan="5" ><h4  align = "center">Costo envio USD `+ porcentaje(total) +`
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
               Metodo de pago y envio
-            </button>
+            </button></h4>
+          </td>
+        </tr>
+        <tr>
+          <td class="tg-0lax" colspan="5" ><h4  align = "center" id = "total" > Total a pagar USD `+ parseInt(porcentaje(total)+total) +`
+          
+            
+             <button class = "btn btn-secondary" onclick ="envio()">Comprar y enviar</button>         
             </h4></td>
         </tr>
         </tbody>
@@ -97,6 +211,7 @@ function printcarritou () {
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+    cambioBan()
     getJSONData(CART_INFO2_URL).then(function(resultObj){
         if (resultObj.status === "ok")
         {

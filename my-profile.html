@@ -11,6 +11,7 @@
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/ventanaModal.css" rel="stylesheet">
 
   <style>
     .bd-placeholder-img {
@@ -40,16 +41,45 @@
       <a class="py-2 d-none d-md-inline-block" href="categories.html">Categorías</a>
       <a class="py-2 d-none d-md-inline-block" href="products.html">Productos</a>
       <a class="py-2 d-none d-md-inline-block" href="sell.html">Vender</a>
-      <a class="py-2 d-none d-md-inline-block" href="cart.html">Mi carrito</a>
+      <div class="dropdown">
+        <button class="btn btn-secondary" type="button" id="btnModal" onclick= abrir()>
+          Usuario <span id="user"></span>
+        </button>
+        <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="cart.html"> Mi carrito</a>
+          <a class="dropdown-item" href="my-profile.html">Mi perfil</a>
+          <button class="dropdown-item" id = "btnCerrar" onclick="localStorage.clear(); alert('Usuario desconectado'); location.href='index.html';" >Cerrar sesion</button>
+        </div>
+      </div>
     </div>
   </nav>
-  <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 7 (Fecha de entrega: 8/11/202020) -> Punto 1 y 2.</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
+  <div id="tvesModal" class="modalContainer">
+    <div class="modal-content">
+      <FORM name=form >
+
+        <P>Usuario:    <INPUT type=text name=login> </P>   
+        <P>Contraseña: <INPUT type=password name=password> </P> 
+      </FORM>    
+      <div><button id="btnAcceder"  value=Acceder>Ingresar</button></div>
+      <div><button id = "btnCerrar" onclick="localStorage.clear(); alert('Usuario desconectado'); location.href='index.html';" >Cerrar sesion</button></div>
     </div>
+  </div>
+  <div class="container p-5">
+    <h4>Datos de Perfil</h4>
+    <div><p>Primer nombre         <input type = text class="myDatos"><span class = "asterisco">*</span></p></div>
+    <div><p>Segundo nombre        <input type = text class="myDatos"></p></div>
+    <div><p>Primer apellido       <input type = text class="myDatos"><span class = "asterisco">*</span></p></div>
+    <div><p>Segundo apellido      <input type = text class="myDatos"></p></div>
+    <div><p>Email                 <input type = text class="myDatos"><span class = "asterisco">*</span></p></div>
+    <div><p>Telefono de contacto  <input type = text class="myDatos"><span class = "asterisco">*</span></p></div>
+    <div><p>Telefono de contacto  <input type = text class="myDatos"><span class = "asterisco">*</span></p></div>
+    <small class="text-muted">El * señala los campos obligatorios</small>
+    <br>
+    <br>
+    <div><button class="btn btn-primary" onclick ="verificar()">Guardar cambios</button></div>
   </div>
   <footer class="text-muted bg-light">
     <div class="container">
@@ -76,6 +106,7 @@
   <script src="js/dropzone.js"></script>
   <script src="js/init.js"></script>
   <script src="js/my-profile.js"></script>
+  <script src="js/login.js"></script>
 </body>
 
 </html>

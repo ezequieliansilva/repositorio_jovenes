@@ -34,3 +34,8 @@
     text-decoration: none;
     cursor: pointer;
 }
+
+.asterisco {
+    color: red;
+    font-size: xx-large;
+}

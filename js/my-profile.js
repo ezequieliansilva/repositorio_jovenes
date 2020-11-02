@@ -34,15 +34,18 @@ function cargarDatos()
     {
         localStorage.setItem("dato"+i, misDatos[i].value.trim()); //setItem almacena el dato en la posición "usuario"
     }
+    localStorage.setItem("imagen", misDatos[7].value.trim());
     return "Datos guardados exitosamente";
 }
 
 function leerDatos(){
     for (let i = 0; i < 7; i++)
     {
-        var usuario = localStorage.getItem("dato"+i);
-        document.getElementsByClassName("myDatos")[i].value=usuario;
+        document.getElementsByClassName("myDatos")[i].value= localStorage.getItem("dato"+i);
+        
     }
+    document.getElementsByClassName("myDatos")[7].value= localStorage.getItem("imagen");
+    document.getElementById("fotoPerfil").src = localStorage.getItem("imagen");
     
 }
 

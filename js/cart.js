@@ -5,10 +5,10 @@ var envioValido = false;
 
 function cambioBan()
 {
-  document.getElementById("datosBancoDiv").style.display = "block";
+  document.getElementById("datosBancoDiv").style.display = "none";
   for (let i = 0; i < 3 ; i++)
   {
-    document.getElementById("datosCredito").style.display = "none";
+    document.getElementById("datosCredito").style.display = "block";
   }
 }
 

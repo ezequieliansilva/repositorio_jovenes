@@ -68,7 +68,8 @@ function sortProducts(criteria, array){
 
 function showProductsList(){
 
-    let htmlContentToAppend = "";
+    let htmlContentToAppend = `<div class="container">
+    <div class="row">`;
     for(let i = 0; i < currentProductsArray.length; i++){
         let product = currentProductsArray[i];
 
@@ -76,8 +77,16 @@ function showProductsList(){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount)) &&
             ((buscador == undefined) || (buscador != undefined && (product.name.toLowerCase().includes(buscador.toLowerCase()) ||
             (product.description.toLowerCase().includes(buscador.toLowerCase())))))){
+                htmlContentToAppend += `<div class="col">
+                <a href="product-info.html" class="list-group-item list-group-item-action">
+                <img src="` + product.imgSrc + `" alt="` + product.description + `" class="img-thumbnail">
+                <h4 class="mb-1">`+ product.name +`</h4>
+                <p class="mb-1">`+ product.description + `</p>
+                <p class="mb-1">`+  product.currency+` ` + product.cost + `</p>
+                <small class="text-muted"> Vendidos ` +product.soldCount+  `</small>
+                </div>`
 
-            htmlContentToAppend += `
+            /*htmlContentToAppend += `
             <a href="product-info.html" class="list-group-item list-group-item-action">
                 <div class="row">
                     <div class="col-3">
@@ -93,11 +102,12 @@ function showProductsList(){
                      </div>
                 </div>
             </a>
-            `
+            `*/
         }
 
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
     }
+    htmlContentToAppend += `</div></div>`
 }
 
 function sortAndShowProducts(sortCriteria, productsArray){
